@@ -47,4 +47,4 @@ fi
 
 satis build ./satis.json "$WEB_DIR"
 
-s3cmd sync --delete-removed "$WEB_DIR" "s3://$S3_BUCKET/"
+s3cmd sync --delete-removed "$WEB_DIR/" "s3://$S3_BUCKET/"
