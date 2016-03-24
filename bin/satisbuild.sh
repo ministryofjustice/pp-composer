@@ -9,6 +9,9 @@
 # GitHub repository to clone (can be private)
 CONFIG_REPO="ministryofjustice/pp-satis-config"
 
+# S3 bucket name
+S3_BUCKET="pp-composer"
+
 # Path to config directory
 CONFIG_DIR="/satis/config"
 WEB_DIR="/satis/web"
@@ -43,3 +46,5 @@ else
 fi
 
 satis build ./satis.json "$WEB_DIR"
+
+s3cmd sync --delete-removed "$WEB_DIR" "s3://$S3_BUCKET/"

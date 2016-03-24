@@ -7,6 +7,7 @@ RUN apt-get update -y && \
         php5-cli \
         curl \
         nano \
+        python-pip \
         git && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /init
@@ -18,6 +19,10 @@ RUN curl -sS https://getcomposer.org/installer | php && \
 # Install satis
 RUN composer create-project composer/satis --stability=dev --keep-vcs /opt/satis && \
     ln -s /opt/satis/bin/satis /usr/local/bin/satis
+
+# Install s3cmd
+RUN pip install s3cmd
+COPY config/s3cmd.conf /root/.s3cfg
 
 # Add satisbuild command
 COPY bin/satisbuild.sh /usr/local/bin/satisbuild
